@@ -7,7 +7,7 @@
   "hideControls": true,
   "rows": [
     {
-      "title": "New row",
+      "title": "",
       "height": "100px",
       "collapse": false,
       "editable": true,
@@ -25,15 +25,8 @@
       ]
     },
     {
-      "height": "610px",
+      "height": "400px",
       "panels": [
-        {
-          "id": 2,
-          "span": 6,
-          "type": "dashlist",
-          "mode": "starred",
-          "title": "Starred dashboards"
-        },
         {
           "id": 3,
           "span": 6,
