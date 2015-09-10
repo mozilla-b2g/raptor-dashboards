@@ -16,7 +16,7 @@ define(function() {
       "iconColor": "#C0C6BE",
       "lineColor": "rgba(255, 96, 96, 0.592157)",
       "iconSize": 13,
-      "enable": true,
+      "enable": false,
       "query": gaiaQuery,
       "titleColumn": "title",
       "textColumn": "text"
