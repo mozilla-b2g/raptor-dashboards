@@ -11,17 +11,17 @@
       "panels": [
         {
           "id": "flame-kk",
-          "span": 3,
+          "span": 4,
           "type": "text",
           "mode": "html",
-          "content": ""
+          "content": "<div id='flame-kk'></div><script>$('#flame-kk').load('views/flame-kk.html')</script>"
         },
         {
           "id": "aries",
-          "span": 3,
+          "span": 4,
           "type": "text",
           "mode": "html",
-          "content": ""
+          "content": "<div id='aries'></div><script>$('#aries').load('views/aries.html')</script>"
         }
       ]
     }
