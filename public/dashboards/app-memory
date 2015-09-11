@@ -31,8 +31,8 @@ var handler = function(callback) {
   require(requires, function($dashboard, $annotations, $context, $memory, $device, $branch, $test, $metric) {
     var dashboard = $dashboard(ARGS);
 
-    dashboard.title = "App Measurements";
-    dashboard.originalTitle = "App Measurements";
+    dashboard.title = "App Memory";
+    dashboard.originalTitle = "App Memory";
     dashboard.templating.list = [
       $context(ARGS),
       $metric(ARGS, 'memory'),
@@ -121,8 +121,8 @@ var handler = function(callback) {
           "x-axis": true,
           "y-axis": true,
           "y_formats": [
-            "ms",
-            "short"
+            "bytes",
+            "none"
           ]
         }
       ],
