@@ -3,9 +3,26 @@
 // accessible variables in this scope
 var window, document, ARGS, $, jQuery, moment, kbn;
 
+// add buildinfo annotation:
+//{
+//  "name": "BuildInfo",
+//  "datasource": "raptor",
+//  "showLine": true,
+//  "iconColor": "#C0C6BE",
+//  "lineColor": "rgba(255, 96, 96, 0.592157)",
+//  "iconSize": 13,
+//  "enable": true,
+//  "query": "select title, tags, text from events where device='flamekk' and memory='512' and branch='vmaster' and title='buildInfo'",
+//  "titleColumn": "title",
+//  "tagsColumn": "tags",
+//  "textColumn": "text"
+//}
+
+// add "node" tag/template
+
 var handler = function(callback) {
 
-  var templates = ['context', 'memory', 'device', 'branch', 'test', 'metric'];
+  var templates = ['memory', 'device', 'branch'];
   var requires = ['base', 'annotations']
     .concat(templates)
     .map(function(r) {
@@ -28,20 +45,17 @@ var handler = function(callback) {
       return tag;
     });
 
-  require(requires, function($dashboard, $annotations, $context, $memory, $device, $branch, $test, $metric) {
+  require(requires, function($dashboard, $annotations, $memory, $device, $branch) {
     var dashboard = $dashboard(ARGS);
 
-    dashboard.title = "App Measurements";
-    dashboard.originalTitle = "App Measurements";
+    dashboard.title = "Mean Time Between Failure";
+    dashboard.originalTitle = "Mean Time Between Failure";
     dashboard.templating.list = [
-      $context(ARGS),
-      $metric(ARGS, 'memory'),
       $memory(ARGS),
       $device(ARGS),
-      $branch(ARGS),
-      $test(ARGS)
+      $branch(ARGS)
     ];
-    dashboard.annotations.list = $annotations(ARGS);
+    dashboard.annotations.list = [];
     dashboard.rows.push({
       "collapse": false,
       "editable": true,
@@ -94,25 +108,51 @@ var handler = function(callback) {
           "steppedLine": false,
           "targets": [
             {
-              "alias": "$tag_metric",
+              "alias": "Mean",
               "fields": [
                 {
                   "func": "mean",
                   "name": "value"
                 }
               ],
-              "groupByTags": [
-                "metric"
+              "groupByTags": [],
+              "measurement": "mtbf",
+              "query": 'SELECT mean(runningHr / crashNo) FROM mtbf WHERE ' + WHERE + ' AND $timeFilter GROUP BY time($interval)',
+              "rawQuery": true,
+              "tags": templateTags
+            },
+            {
+              "alias": "Min",
+              "fields": [
+                {
+                  "func": "min",
+                  "name": "value"
+                }
               ],
-              "measurement": "memory",
-              "query": 'SELECT mean(value) FROM memory WHERE ' + WHERE + ' AND $timeFilter GROUP BY time($interval), "metric"',
+              "groupByTags": [],
+              "measurement": "mtbf",
+              "query": 'SELECT min(runningHr / crashNo) FROM mtbf WHERE ' + WHERE + ' AND $timeFilter GROUP BY time($interval)',
+              "rawQuery": true,
+              "tags": templateTags
+            },
+            {
+              "alias": "Max",
+              "fields": [
+                {
+                  "func": "max",
+                  "name": "value"
+                }
+              ],
+              "groupByTags": [],
+              "measurement": "mtbf",
+              "query": 'SELECT max(runningHr / crashNo) FROM mtbf WHERE ' + WHERE + ' AND $timeFilter GROUP BY time($interval)',
               "rawQuery": true,
               "tags": templateTags
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "$context",
+          "title": "MTBF",
           "tooltip": {
             "shared": true,
             "value_type": "cumulative"
@@ -121,12 +161,12 @@ var handler = function(callback) {
           "x-axis": true,
           "y-axis": true,
           "y_formats": [
-            "ms",
-            "short"
+            "none",
+            "none"
           ]
         }
       ],
-      "title": "Apps"
+      "title": "MTBF"
     });
 
     callback(dashboard);

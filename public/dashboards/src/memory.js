@@ -3,14 +3,10 @@ define(function() {
   return function (query) {
     var templateQuery = 'SHOW TAG VALUES FROM "memory" WITH KEY = "memory"';
 
-    if (query.uuid) {
-      templateQuery += ' WHERE uuid = "' + query.uuid + '"';
-    }
-
     return {
       "allFormat": "glob",
       "current": {},
-      "datasource": query.source || "raptor",
+      "datasource": "raptor",
       "includeAll": false,
       "label": "Memory",
       "multi": true,

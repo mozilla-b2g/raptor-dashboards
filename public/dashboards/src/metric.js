@@ -3,14 +3,10 @@ define(function() {
   return function(query, type) {
     var templateQuery = 'SHOW TAG VALUES FROM "' + type + '" WITH KEY = "metric"';
 
-    if (query.uuid) {
-      templateQuery += ' WHERE uuid = "' + query.uuid + '"';
-    }
-
     return {
       "allFormat": "regex values",
       "current": {},
-      "datasource": query.source || "raptor",
+      "datasource": "raptor",
       "includeAll": true,
       "label": "Metric",
       "multi": true,

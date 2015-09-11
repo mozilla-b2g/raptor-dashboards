@@ -50,7 +50,7 @@ var handler = function(callback) {
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": ARGS.source || "raptor",
+          "datasource": "raptor",
           "editable": true,
           "error": false,
           "fill": 0,
