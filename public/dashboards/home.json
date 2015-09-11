@@ -11,17 +11,19 @@
       "panels": [
         {
           "id": "flame-kk",
+          "title": "Flame KK",
           "span": 4,
           "type": "text",
           "mode": "html",
-          "content": "<div id='flame-kk'></div><script>$('#flame-kk').load('views/flame-kk.html')</script>"
+          "content": "<div id='flame-kk'></div><script>$('#flame-kk').load('public/views/flame-kk.html')</script>"
         },
         {
           "id": "aries",
+          "title": "Aries",
           "span": 4,
           "type": "text",
           "mode": "html",
-          "content": "<div id='aries'></div><script>$('#aries').load('views/aries.html')</script>"
+          "content": "<div id='aries'></div><script>$('#aries').load('public/views/aries.html')</script>"
         }
       ]
     }
