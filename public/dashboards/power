@@ -1,0 +1,116 @@
+/* global _ */
+
+// accessible variables in this scope
+var window, document, ARGS, $, jQuery, moment, kbn;
+
+var handler = function(callback) {
+
+  var templates = ['memory', 'device', 'branch'];
+  var requires = ['base']
+    .concat(templates)
+    .map(function(r) {
+      return 'public/dashboards/src/' + r + '.js';
+    });
+  var MEASUREMENT = 'power';
+
+  var Panel = function(id, title, context) {
+    return {
+      "id": id,
+      "title": title,
+      "targets": [{
+        measurement: 'power',
+        queryRaw: true,
+        query: 'SELECT mean(value) FROM power WHERE "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "test" =~ /' + id + '/ AND "context" =~ /' + context + '/ AND $timeFilter GROUP BY time($interval)'
+      }],
+      "aliasColors": {},
+      "bars": false,
+      "datasource": "raptor",
+      "editable": true,
+      "error": false,
+      "fill": 0,
+      "grid": {
+        "leftLogBase": 1,
+          "leftMax": null,
+          "leftMin": 0,
+          "rightLogBase": 1,
+          "rightMax": null,
+          "rightMin": null,
+          "threshold1": null,
+          "threshold1Color": "rgba(216, 200, 27, 0.27)",
+          "threshold2": null,
+          "threshold2Color": "rgba(234, 112, 112, 0.22)"
+      },
+      "height": "300",
+      "legend": {
+        "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "minSpan": 6,
+      "nullPointMode": "connected",
+      "percentage": false,
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "repeat": "context",
+      "scopedVars": {},
+      "seriesOverrides": [],
+      "span": 12,
+      "stack": false,
+      "steppedLine": false,
+      "timeFrom": null,
+      "timeShift": null,
+      "tooltip": {
+        "shared": true,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "x-axis": true,
+      "y-axis": true,
+      "y_formats": [
+        "amp",
+        "none"
+      ]
+    };
+  };
+
+  require(requires, function($dashboard, $memory, $device, $branch) {
+    var dashboard = $dashboard();
+
+    dashboard.title = dashboard.originalTitle = "Power";
+    dashboard.templating.list = [$memory(MEASUREMENT), $device(MEASUREMENT), $branch(MEASUREMENT)];
+    dashboard.annotations.list = [];
+    dashboard.rows.push({
+      "collapse": false,
+      "editable": true,
+      "height": "300",
+      "title": "Power",
+      "panels": [
+        new Panel('camera_preview', 'Camera Preview', 'camera.gaiamobile.org'),
+        new Panel('camera_picture', 'Camera Picture', 'camera.gaiamobile.org'),
+        new Panel('camera_video', 'Camera Video', 'camera.gaiamobile.org'),
+        new Panel('idle_screen_off', 'Homescreen: Idle screen Off', 'verticalhome.gaiamobile.org'),
+        new Panel('idle_screen_on', 'Homescreen: Idle screen On', 'verticalhome.gaiamobile.org'),
+        new Panel('background_music_playback', 'Music: Background Music Playback', 'music.gaiamobile.org'),
+        new Panel('music_playback', 'Music: Background Music Playback', 'music.gaiamobile.org'),
+        new Panel('video_playback', 'Video: Video Playback', 'video.gaiamobile.org'),
+        new Panel('idle_wifi_screen_off', 'Idle WiFi: Screen Off', 'verticalhome.gaiamobile.org'),
+        new Panel('idle_wifi_screen_on', 'Idle WiFi: Screen On', 'verticalhome.gaiamobile.org'),
+        new Panel('wifi_browser_download', 'WiFi: Browser Download', 'browser.gaiamobile.org'),
+        new Panel('wifi_browser_node', 'WiFi: Browser Node', 'browser.gaiamobile.org'),
+      ]
+    });
+
+    callback(dashboard);
+  });
+
+};
+
+return handler;

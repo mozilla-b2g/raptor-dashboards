@@ -1,6 +1,6 @@
 define(function() {
 
-  return function(query, type) {
+  return function(type) {
     var templateQuery = 'SHOW TAG VALUES FROM "' + type + '" WITH KEY = "metric"';
 
     return {

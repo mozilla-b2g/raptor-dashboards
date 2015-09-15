@@ -3,63 +3,28 @@
 // accessible variables in this scope
 var window, document, ARGS, $, jQuery, moment, kbn;
 
-// add buildinfo annotation:
-//{
-//  "name": "BuildInfo",
-//  "datasource": "raptor",
-//  "showLine": true,
-//  "iconColor": "#C0C6BE",
-//  "lineColor": "rgba(255, 96, 96, 0.592157)",
-//  "iconSize": 13,
-//  "enable": true,
-//  "query": "select title, tags, text from events where device='flamekk' and memory='512' and branch='vmaster' and title='buildInfo'",
-//  "titleColumn": "title",
-//  "tagsColumn": "tags",
-//  "textColumn": "text"
-//}
-
-// add "node" tag/template
-
 var handler = function(callback) {
 
-  var templates = ['memory', 'device', 'branch'];
+  var templates = ['memory', 'device', 'branch', 'node'];
   var requires = ['base', 'annotations']
     .concat(templates)
     .map(function(r) {
       return 'public/dashboards/src/' + r + '.js';
     });
-  var WHERE = templates.map(function(t) {
-    return '"@" =~ /$@/'.replace(/@/g, t);
-  }).join(' AND ');
-  var templateTags = templates
-    .map(function(t) {
-      var tag = {
-        key: t,
-        value: '/$' + t + '/'
-      };
+  var MEASUREMENT = 'mtbf';
+  var TEST = 'mtbf';
 
-      if (t !== templates[0]) {
-        tag.condition = 'AND';
-      }
+  require(requires, function($dashboard, $annotations, $memory, $device, $branch, $node) {
+    var dashboard = $dashboard();
+    var annotations = $annotations(TEST);
 
-      return tag;
-    });
-
-  require(requires, function($dashboard, $annotations, $memory, $device, $branch) {
-    var dashboard = $dashboard(ARGS);
-
-    dashboard.title = "Mean Time Between Failure";
-    dashboard.originalTitle = "Mean Time Between Failure";
-    dashboard.templating.list = [
-      $memory(ARGS),
-      $device(ARGS),
-      $branch(ARGS)
-    ];
-    dashboard.annotations.list = [];
+    dashboard.title = dashboard.originalTitle = "Mean Time Between Failure";
+    dashboard.templating.list = [$memory(MEASUREMENT), $device(MEASUREMENT), $branch(MEASUREMENT), $node(MEASUREMENT)];
+    dashboard.annotations.list = [annotations.buildInfo, annotations.gaia, annotations.gecko];
     dashboard.rows.push({
       "collapse": false,
       "editable": true,
-      "height": "300",
+      "height": "500",
       "panels": [
         {
           "aliasColors": {},
@@ -103,51 +68,16 @@ var handler = function(callback) {
           "repeat": "context",
           "scopedVars": {},
           "seriesOverrides": [],
-          "span": 6,
+          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "alias": "Mean",
-              "fields": [
-                {
-                  "func": "mean",
-                  "name": "value"
-                }
-              ],
+              "alias": "mtbf hours",
               "groupByTags": [],
-              "measurement": "mtbf",
-              "query": 'SELECT mean(runningHr / crashNo) FROM mtbf WHERE ' + WHERE + ' AND $timeFilter GROUP BY time($interval)',
-              "rawQuery": true,
-              "tags": templateTags
-            },
-            {
-              "alias": "Min",
-              "fields": [
-                {
-                  "func": "min",
-                  "name": "value"
-                }
-              ],
-              "groupByTags": [],
-              "measurement": "mtbf",
-              "query": 'SELECT min(runningHr / crashNo) FROM mtbf WHERE ' + WHERE + ' AND $timeFilter GROUP BY time($interval)',
-              "rawQuery": true,
-              "tags": templateTags
-            },
-            {
-              "alias": "Max",
-              "fields": [
-                {
-                  "func": "max",
-                  "name": "value"
-                }
-              ],
-              "groupByTags": [],
-              "measurement": "mtbf",
-              "query": 'SELECT max(runningHr / crashNo) FROM mtbf WHERE ' + WHERE + ' AND $timeFilter GROUP BY time($interval)',
-              "rawQuery": true,
-              "tags": templateTags
+              "measurement": MEASUREMENT,
+              "query": 'SELECT sum(value) / sum(crashNumber) FROM mtbf WHERE "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "node" =~ /$node/ AND $timeFilter GROUP BY time($interval)',
+              "rawQuery": true
             }
           ],
           "timeFrom": null,
@@ -171,7 +101,6 @@ var handler = function(callback) {
 
     callback(dashboard);
   });
-
 
 };
 

@@ -1,10 +1,13 @@
 define(function() {
 
-  return function(query) {
-    var gaiaQuery = 'SELECT title, text FROM annotation WHERE "title" =~ /Gaia/ AND "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "test" =~ /$test/ AND $timeFilter';
-    var geckoQuery = 'SELECT title, text FROM annotation WHERE "title" =~ /Gecko/ AND "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "test" =~ /$test/ AND $timeFilter';
+  return function(test) {
+    var gaiaQuery = 'SELECT title, text FROM annotation WHERE "title" =~ /Gaia/ AND "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "test" =~ /' + test + '/ AND $timeFilter';
+    var geckoQuery = 'SELECT title, text FROM annotation WHERE "title" =~ /Gecko/ AND "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "test" =~ /' + test + '/ AND $timeFilter';
+    var buildInfoQuery = 'SELECT title, text FROM annotation WHERE "title" =~ /BuildInfo/ AND "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "test" =~ /' + test + '/ AND $timeFilter';
 
-    return [{
+    var annotations = {};
+
+    annotations.gaia = {
       "name": "Gaia",
       "datasource": "raptor",
       "showLine": false,
@@ -15,7 +18,9 @@ define(function() {
       "query": gaiaQuery,
       "titleColumn": "title",
       "textColumn": "text"
-    }, {
+    };
+
+    annotations.gecko = {
       "name": "Gecko",
       "datasource": "raptor",
       "showLine": false,
@@ -26,7 +31,22 @@ define(function() {
       "query": geckoQuery,
       "titleColumn": "title",
       "textColumn": "text"
-    }];
+    };
+
+    annotations.buildInfo = {
+      "name": "BuildInfo",
+      "datasource": "raptor",
+      "showLine": false,
+      "iconColor": "#C0C6BE",
+      "lineColor": "rgba(255, 96, 96, 0.592157)",
+      "iconSize": 13,
+      "enable": false,
+      "query": buildInfoQuery,
+      "titleColumn": "title",
+      "textColumn": "text"
+    };
+
+    return annotations;
   };
 
 });

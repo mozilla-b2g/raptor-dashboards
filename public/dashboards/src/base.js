@@ -1,6 +1,6 @@
 define(function() {
 
-  return function(query) {
+  return function() {
     return {
       "id": 0,
       "title": "",

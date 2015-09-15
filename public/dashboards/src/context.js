@@ -1,7 +1,7 @@
 define(function() {
 
-  return function(query) {
-    var templateQuery = 'SHOW TAG VALUES FROM "measure" WITH KEY = "context"';
+  return function(measurement) {
+    var templateQuery = 'SHOW TAG VALUES FROM "' + measurement + '" WITH KEY = "context"';
 
     return {
       "allFormat": "regex values",

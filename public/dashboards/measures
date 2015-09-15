@@ -1,0 +1,145 @@
+/* global _ */
+
+// accessible variables in this scope
+var window, document, ARGS, $, jQuery, moment, kbn;
+
+var handler = function(callback) {
+  var apps = {
+    'cold-launch': {
+      'calendar.gaiamobile.org': { threshold: 1454, goal: 1000 },
+      'camera.gaiamobile.org': { threshold: 1492, goal: 1000 },
+      'clock.gaiamobile.org': { threshold: 1232, goal: 1000 },
+      'communications.gaiamobile.org@contacts': { threshold: 773, goal: 1000 },
+      'communications.gaiamobile.org@dialer': { threshold: 851, goal: 1000 },
+      'email.gaiamobile.org': { threshold: 2129, goal: 1000 },
+      'fm.gaiamobile.org': { threshold: 604, goal: 1000 },
+      'gallery.gaiamobile.org': { threshold: 1113, goal: 1000 },
+      'sms.gaiamobile.org': { threshold: 1340, goal: 1000 },
+      'music.gaiamobile.org': { threshold: 1066, goal: 1000 },
+      'settings.gaiamobile.org': { threshold: 2474, goal: 1000 },
+      'video.gaiamobile.org': { threshold: 1115, goal: 1000 },
+      'test-startup-limit.gaiamobile.org': { threshold: null, goal: 1000 }
+    },
+    'reboot': {
+      'verticalhome.gaiamobile.org': { threshold: null, goal: null },
+      'system.gaiamobile.org': { threshold: null, goal: null },
+      'b2g': { threshold: null, goal: null }
+    }
+  };
+  var tests = {
+    'cold-launch': 'Cold Launch',
+    'reboot': 'Reboot'
+  };
+  var templates = ['memory', 'device', 'branch', 'metric'];
+  var requires = ['base', 'annotations']
+    .concat(templates)
+    .map(function(r) {
+      return 'public/dashboards/src/' + r + '.js';
+    });
+  var MEASUREMENT = 'measure';
+  var TEST = ARGS['var-test'] || 'cold-launch';
+
+  require(requires, function($dashboard, $annotations, $memory, $device, $branch, $metric) {
+    var dashboard = $dashboard();
+    var annotations = $annotations(TEST);
+
+    dashboard.title = dashboard.originalTitle = 'Measurements: ' + tests[TEST];
+    dashboard.templating.list = [$metric(MEASUREMENT), $memory(MEASUREMENT), $device(MEASUREMENT), $branch(MEASUREMENT)];
+    dashboard.annotations.list = [annotations.gaia, annotations.gecko];
+    dashboard.rows = [{
+      "title": "Apps",
+      "collapse": false,
+      "editable": true,
+      "height": "300"
+    }];
+
+    dashboard.rows[0].panels = Object.keys(apps[TEST]).map(function(context) {
+      var app = apps[TEST][context];
+
+      return {
+        "aliasColors": {},
+        "bars": false,
+        "datasource": "raptor",
+        "editable": true,
+        "error": false,
+        "fill": 0,
+        "grid": {
+          "leftLogBase": 1,
+          "leftMax": null,
+          "leftMin": 0,
+          "rightLogBase": 1,
+          "rightMax": null,
+          "rightMin": null,
+          "threshold1": app.goal,
+          "threshold1Color": "rgba(216, 200, 27, 0.40)",
+          "threshold2": app.threshold,
+          "threshold2Color": "rgba(234, 112, 112, 0.40)",
+          "thresholdLine": true
+        },
+        "height": "300",
+        "id": context,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 1,
+        "links": [],
+        "minSpan": 6,
+        "nullPointMode": "connected",
+        "percentage": false,
+        "pointradius": 2,
+        "points": true,
+        "renderer": "flot",
+        "scopedVars": {},
+        "seriesOverrides": [],
+        "span": 6,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "alias": "$tag_metric",
+            "fields": [
+              {
+                "func": "percentile",
+                "name": "value"
+              }
+            ],
+            "groupByTags": [
+              "metric"
+            ],
+            "measurement": MEASUREMENT,
+            "query": 'SELECT percentile(value, 95) FROM ' + MEASUREMENT + ' WHERE "context" =~ /' + context + '/ AND "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "metric" =~ /$metric/ AND $timeFilter GROUP BY time($interval), "metric"',
+            "rawQuery": true
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": context,
+        "tooltip": {
+          "shared": true,
+          "value_type": "cumulative"
+        },
+        "type": "graph",
+        "x-axis": true,
+        "y-axis": true,
+        "y_formats": [
+          "ms",
+          "none"
+        ]
+      };
+    });
+
+
+    callback(dashboard);
+  });
+
+
+};
+
+return handler;

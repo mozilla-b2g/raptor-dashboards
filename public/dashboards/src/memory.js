@@ -1,7 +1,7 @@
 define(function() {
 
-  return function (query) {
-    var templateQuery = 'SHOW TAG VALUES FROM "memory" WITH KEY = "memory"';
+  return function (measurement) {
+    var templateQuery = 'SHOW TAG VALUES FROM "' + measurement + '" WITH KEY = "memory"';
 
     return {
       "allFormat": "glob",

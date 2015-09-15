@@ -1,17 +1,18 @@
 define(function() {
 
-  return function(measurement) {
-    var templateQuery = 'SHOW TAG VALUES FROM "' + measurement + '" WITH KEY = "branch"';
+  return function(query, override) {
+    var measurement = override || 'mtbf';
+    var templateQuery = 'SHOW TAG VALUES FROM "' + measurement + '" WITH KEY = "node"';
 
     return {
       "allFormat": "glob",
       "current": {},
       "datasource": "raptor",
       "includeAll": false,
-      "label": "Branch",
+      "label": "Node",
       "multi": true,
       "multiFormat": "glob",
-      "name": "branch",
+      "name": "node",
       "options": [],
       "query": templateQuery,
       "refresh": true,
