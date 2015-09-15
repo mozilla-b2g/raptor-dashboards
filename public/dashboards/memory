@@ -6,24 +6,24 @@ var window, document, ARGS, $, jQuery, moment, kbn;
 var handler = function(callback) {
   var apps = {
     'cold-launch': {
-      'calendar.gaiamobile.org': { threshold: null, goal: null },
-      'camera.gaiamobile.org': { threshold: null, goal: null },
-      'clock.gaiamobile.org': { threshold: null, goal: null },
-      'communications.gaiamobile.org@contacts': { threshold: null, goal: null },
-      'communications.gaiamobile.org@dialer': { threshold: null, goal: null },
-      'email.gaiamobile.org': { threshold: null, goal: null },
-      'fm.gaiamobile.org': { threshold: null, goal: null },
-      'gallery.gaiamobile.org': { threshold: null, goal: null },
-      'sms.gaiamobile.org': { threshold: null, goal: null },
-      'music.gaiamobile.org': { threshold: null, goal: null },
-      'settings.gaiamobile.org': { threshold: null, goal: null },
-      'video.gaiamobile.org': { threshold: null, goal: null },
-      'test-startup-limit.gaiamobile.org': { threshold: null, goal: null }
+      'calendar.gaiamobile.org': { id: 1, threshold: null, goal: null },
+      'camera.gaiamobile.org': { id: 2, threshold: null, goal: null },
+      'clock.gaiamobile.org': { id: 3, threshold: null, goal: null },
+      'communications.gaiamobile.org@contacts': { id: 4, threshold: null, goal: null },
+      'communications.gaiamobile.org@dialer': { id: 5, threshold: null, goal: null },
+      'email.gaiamobile.org': { id: 6, threshold: null, goal: null },
+      'fm.gaiamobile.org': { id: 7, threshold: null, goal: null },
+      'gallery.gaiamobile.org': { id: 8, threshold: null, goal: null },
+      'sms.gaiamobile.org': { id: 9, threshold: null, goal: null },
+      'music.gaiamobile.org': { id: 10, threshold: null, goal: null },
+      'settings.gaiamobile.org': { id: 11, threshold: null, goal: null },
+      'video.gaiamobile.org': { id: 12, threshold: null, goal: null },
+      'test-startup-limit.gaiamobile.org': { id: 13 ,threshold: null, goal: null }
     },
     'reboot': {
-      'verticalhome.gaiamobile.org': { threshold: null, goal: null },
-      'system.gaiamobile.org': { threshold: null, goal: null },
-      'b2g': { threshold: null, goal: null }
+      'verticalhome.gaiamobile.org': { id: 14, threshold: null, goal: null },
+      'system.gaiamobile.org': { id: 15, threshold: null, goal: null },
+      'b2g': { id: 16, threshold: null, goal: null }
     }
   };
   var tests = {
@@ -77,7 +77,7 @@ var handler = function(callback) {
           "thresholdLine": true
         },
         "height": "300",
-        "id": context,
+        "id": app.id,
         "legend": {
           "avg": false,
           "current": false,
