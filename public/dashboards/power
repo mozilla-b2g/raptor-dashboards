@@ -12,10 +12,11 @@ var handler = function(callback) {
       return 'public/dashboards/src/' + r + '.js';
     });
   var MEASUREMENT = 'power';
+  var panelId = 1;
 
   var Panel = function(id, title, context) {
     return {
-      "id": id,
+      "id": panelId++,
       "title": title,
       "targets": [{
         measurement: 'power',
