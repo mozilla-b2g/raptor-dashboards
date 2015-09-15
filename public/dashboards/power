@@ -20,7 +20,7 @@ var handler = function(callback) {
       "targets": [{
         measurement: 'power',
         queryRaw: true,
-        query: 'SELECT mean(value) FROM power WHERE "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "test" =~ /' + id + '/ AND "context" =~ /' + context + '/ AND $timeFilter GROUP BY time($interval)'
+        query: 'SELECT mean(value) / 1000 FROM power WHERE "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "test" =~ /' + id + '/ AND "context" =~ /' + context + '/ AND $timeFilter GROUP BY time($interval)'
       }],
       "aliasColors": {},
       "bars": false,
@@ -62,7 +62,7 @@ var handler = function(callback) {
       "repeat": "context",
       "scopedVars": {},
       "seriesOverrides": [],
-      "span": 12,
+      "span": 6,
       "stack": false,
       "steppedLine": false,
       "timeFrom": null,
