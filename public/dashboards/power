@@ -19,7 +19,7 @@ var handler = function(callback) {
       "id": panelId++,
       "title": title,
       "targets": [{
-        alias: 'mean mA',
+        alias: '$tag_test',
         measurement: 'power',
         rawQuery: true,
         query: 'SELECT mean(value) / 1000 FROM power WHERE "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "test" =~ /' + id + '/ AND "context" =~ /' + context + '/ AND $timeFilter GROUP BY time($interval)'
@@ -106,7 +106,7 @@ var handler = function(callback) {
         new Panel('idle_wifi_screen_off', 'Idle WiFi: Screen Off', 'verticalhome.gaiamobile.org'),
         new Panel('idle_wifi_screen_on', 'Idle WiFi: Screen On', 'verticalhome.gaiamobile.org'),
         new Panel('wifi_browser_download', 'WiFi: Browser Download', 'browser.gaiamobile.org'),
-        new Panel('wifi_browser_node', 'WiFi: Browser Node', 'browser.gaiamobile.org'),
+        new Panel('wifi_browser_node', 'WiFi: Browser Node', 'browser.gaiamobile.org')
       ]
     });
 
