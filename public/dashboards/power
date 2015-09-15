@@ -19,8 +19,9 @@ var handler = function(callback) {
       "id": panelId++,
       "title": title,
       "targets": [{
+        alias: 'mean mA',
         measurement: 'power',
-        queryRaw: true,
+        rawQuery: true,
         query: 'SELECT mean(value) / 1000 FROM power WHERE "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "test" =~ /' + id + '/ AND "context" =~ /' + context + '/ AND $timeFilter GROUP BY time($interval)'
       }],
       "aliasColors": {},
