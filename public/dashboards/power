@@ -22,7 +22,7 @@ var handler = function(callback) {
         alias: '$tag_test',
         measurement: 'power',
         rawQuery: true,
-        query: 'SELECT mean(value) / 1000 FROM power WHERE "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "test" =~ /' + id + '/ AND "context" =~ /' + context + '/ AND $timeFilter GROUP BY time($interval)'
+        query: 'SELECT mean(value) FROM power WHERE "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "test" =~ /' + id + '/ AND "context" =~ /' + context + '/ AND $timeFilter GROUP BY time($interval)'
       }],
       "aliasColors": {},
       "bars": false,
@@ -77,9 +77,10 @@ var handler = function(callback) {
       "x-axis": true,
       "y-axis": true,
       "y_formats": [
-        "amp",
+        "none",
         "none"
-      ]
+      ],
+      "leftYAxisLabel": "mA"
     };
   };
 
