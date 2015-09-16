@@ -22,7 +22,7 @@ var handler = function(callback) {
         alias: '$tag_test',
         measurement: 'power',
         rawQuery: true,
-        query: 'SELECT mean(value) FROM power WHERE "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "test" =~ /' + id + '/ AND "context" =~ /' + context + '/ AND $timeFilter GROUP BY time($interval), "test"'
+        query: 'SELECT mean(value) FROM power WHERE "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "test" = "' + id + '" AND "context" =~ /' + context + '/ AND $timeFilter GROUP BY time($interval), "test"'
       }],
       "aliasColors": {},
       "bars": false,
@@ -102,7 +102,7 @@ var handler = function(callback) {
         new Panel('idle_screen_off', 'Homescreen: Idle screen Off', 'verticalhome.gaiamobile.org'),
         new Panel('idle_screen_on', 'Homescreen: Idle screen On', 'verticalhome.gaiamobile.org'),
         new Panel('background_music_playback', 'Music: Background Music Playback', 'music.gaiamobile.org'),
-        new Panel('music_playback', 'Music: Background Music Playback', 'music.gaiamobile.org'),
+        new Panel('music_playback', 'Music: Playback', 'music.gaiamobile.org'),
         new Panel('video_playback', 'Video: Video Playback', 'video.gaiamobile.org'),
         new Panel('idle_wifi_screen_off', 'Idle WiFi: Screen Off', 'verticalhome.gaiamobile.org'),
         new Panel('idle_wifi_screen_on', 'Idle WiFi: Screen On', 'verticalhome.gaiamobile.org'),
