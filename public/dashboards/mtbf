@@ -32,7 +32,7 @@ var handler = function(callback) {
           "datasource": "raptor",
           "editable": true,
           "error": false,
-          "fill": 0,
+          "fill": 2,
           "grid": {
             "leftLogBase": 1,
             "leftMax": null,
@@ -63,14 +63,14 @@ var handler = function(callback) {
           "nullPointMode": "connected",
           "percentage": false,
           "pointradius": 2,
-          "points": true,
+          "points": false,
           "renderer": "flot",
           "repeat": "context",
           "scopedVars": {},
           "seriesOverrides": [],
           "span": 12,
           "stack": false,
-          "steppedLine": false,
+          "steppedLine": true,
           "targets": [
             {
               "alias": "mtbf hours",
