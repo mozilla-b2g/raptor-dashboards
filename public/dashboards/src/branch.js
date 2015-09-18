@@ -9,7 +9,7 @@ define(function() {
       "datasource": "raptor",
       "includeAll": false,
       "label": "Branch",
-      "multi": true,
+      "multi": false,
       "multiFormat": "regex values",
       "name": "branch",
       "options": [],

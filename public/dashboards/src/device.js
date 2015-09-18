@@ -9,7 +9,7 @@ define(function() {
       "datasource": "raptor",
       "includeAll": false,
       "label": "Device",
-      "multi": true,
+      "multi": false,
       "multiFormat": "regex values",
       "name": "device",
       "options": [],
