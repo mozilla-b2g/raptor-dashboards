@@ -24,14 +24,6 @@
           "type": "text",
           "mode": "html",
           "content": "<div id='aries'></div><script>$('#aries').load('public/views/aries.html')</script>"
-        },
-        {
-          "id": 100,
-          "title": "Starred Dashboards",
-          "span": 4,
-          "type": "dashlist",
-          "mode": "starred",
-          "limit": 10
         }
       ]
     }
