@@ -8,6 +8,12 @@
 
     <title>Grafana</title>
 
+		<script>
+			if (window.location.protocol !== 'https:') {
+				window.location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+			}
+		</script>
+
 		[[if .User.LightTheme]]
 		  <link rel="stylesheet" href="[[.AppSubUrl]]/css/grafana.light.min.eff1f636.css">
 		[[else]]
