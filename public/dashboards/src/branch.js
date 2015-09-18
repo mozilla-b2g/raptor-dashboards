@@ -10,7 +10,7 @@ define(function() {
       "includeAll": false,
       "label": "Branch",
       "multi": true,
-      "multiFormat": "glob",
+      "multiFormat": "regex values",
       "name": "branch",
       "options": [],
       "query": templateQuery,

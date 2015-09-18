@@ -10,7 +10,7 @@ define(function() {
       "includeAll": false,
       "label": "Device",
       "multi": true,
-      "multiFormat": "glob",
+      "multiFormat": "regex values",
       "name": "device",
       "options": [],
       "query": templateQuery,

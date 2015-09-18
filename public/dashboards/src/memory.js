@@ -10,7 +10,7 @@ define(function() {
       "includeAll": false,
       "label": "Memory",
       "multi": true,
-      "multiFormat": "glob",
+      "multiFormat": "regex values",
       "name": "memory",
       "options": [],
       "query": templateQuery,
