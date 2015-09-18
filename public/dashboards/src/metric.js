@@ -1,7 +1,11 @@
 define(function() {
 
-  return function(type) {
+  return function(type, test) {
     var templateQuery = 'SHOW TAG VALUES FROM "' + type + '" WITH KEY = "metric"';
+
+    if (test) {
+      templateQuery += " WHERE test = '" + test + "'";
+    }
 
     return {
       "allFormat": "regex values",

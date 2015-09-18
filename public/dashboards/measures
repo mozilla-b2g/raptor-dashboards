@@ -44,7 +44,7 @@ var handler = function(callback) {
     var annotations = $annotations(TEST);
 
     dashboard.title = dashboard.originalTitle = 'Measurements: ' + tests[TEST];
-    dashboard.templating.list = [$metric(MEASUREMENT), $memory(MEASUREMENT), $device(MEASUREMENT), $branch(MEASUREMENT)];
+    dashboard.templating.list = [$metric(MEASUREMENT, TEST), $memory(MEASUREMENT), $device(MEASUREMENT), $branch(MEASUREMENT)];
     dashboard.annotations.list = [annotations.gaia, annotations.gecko];
     dashboard.rows = [{
       "title": "Apps",
