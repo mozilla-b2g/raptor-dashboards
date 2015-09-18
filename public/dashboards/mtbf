@@ -20,7 +20,7 @@ var handler = function(callback) {
 
     dashboard.title = dashboard.originalTitle = "Mean Time Between Failure";
     dashboard.templating.list = [$memory(MEASUREMENT), $device(MEASUREMENT), $branch(MEASUREMENT), $node(MEASUREMENT)];
-    dashboard.annotations.list = [annotations.buildInfo, annotations.gaia, annotations.gecko];
+    dashboard.annotations.list = [annotations.buildId, annotations.gaia, annotations.gecko];
     dashboard.rows.push({
       "collapse": false,
       "editable": true,

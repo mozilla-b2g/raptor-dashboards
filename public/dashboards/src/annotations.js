@@ -3,7 +3,7 @@ define(function() {
   return function(test) {
     var gaiaQuery = 'SELECT title, text FROM annotation WHERE "title" =~ /Gaia/ AND "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "test" =~ /' + test + '/ AND $timeFilter';
     var geckoQuery = 'SELECT title, text FROM annotation WHERE "title" =~ /Gecko/ AND "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "test" =~ /' + test + '/ AND $timeFilter';
-    var buildInfoQuery = 'SELECT title, text FROM annotation WHERE "title" =~ /BuildInfo/ AND "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "test" =~ /' + test + '/ AND $timeFilter';
+    var buildIdQuery = 'SELECT title, text FROM annotation WHERE "title" =~ /BuildId/ AND "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "test" =~ /' + test + '/ AND $timeFilter';
 
     var annotations = {};
 
@@ -33,15 +33,15 @@ define(function() {
       "textColumn": "text"
     };
 
-    annotations.buildInfo = {
-      "name": "BuildInfo",
+    annotations.buildId = {
+      "name": "BuildId",
       "datasource": "raptor",
       "showLine": false,
       "iconColor": "#C0C6BE",
       "lineColor": "rgba(255, 96, 96, 0.592157)",
       "iconSize": 13,
       "enable": false,
-      "query": buildInfoQuery,
+      "query": buildIdQuery,
       "titleColumn": "title",
       "textColumn": "text"
     };
