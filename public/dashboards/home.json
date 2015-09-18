@@ -10,7 +10,7 @@
       "height": "300px",
       "panels": [
         {
-          "id": "flame-kk",
+          "id": 1,
           "title": "Flame KK",
           "span": 4,
           "type": "text",
@@ -18,12 +18,20 @@
           "content": "<div id='flame-kk'></div><script>$('#flame-kk').load('public/views/flame-kk.html')</script>"
         },
         {
-          "id": "aries",
+          "id": 2,
           "title": "Aries",
           "span": 4,
           "type": "text",
           "mode": "html",
           "content": "<div id='aries'></div><script>$('#aries').load('public/views/aries.html')</script>"
+        },
+        {
+          "id": 100,
+          "title": "Starred Dashboards",
+          "span": 4,
+          "type": "dashlist",
+          "mode": "starred",
+          "limit": 10
         }
       ]
     }
