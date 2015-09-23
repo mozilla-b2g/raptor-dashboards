@@ -13,6 +13,7 @@ var handler = function(callback) {
       'communications.gaiamobile.org@dialer': { id: 5, threshold: 851, goal: 1000 },
       'email.gaiamobile.org': { id: 6, threshold: 2129, goal: 1000 },
       'fm.gaiamobile.org': { id: 7, threshold: 604, goal: 1000 },
+      'ftu.gaiamobile.org': { id: 14, threshold: null, goal: 1000 },
       'gallery.gaiamobile.org': { id: 8, threshold: 1113, goal: 1000 },
       'sms.gaiamobile.org': { id: 9, threshold: 1340, goal: 1000 },
       'music.gaiamobile.org': { id: 10, threshold: 1066, goal: 1000 },
