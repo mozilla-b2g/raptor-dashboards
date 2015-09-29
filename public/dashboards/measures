@@ -115,7 +115,7 @@ var handler = function(callback) {
               "metric"
             ],
             "measurement": MEASUREMENT,
-            "query": 'SELECT percentile(value, 95) FROM ' + MEASUREMENT + ' WHERE "context" =~ /' + context + '/ AND "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "metric" =~ /$metric/ AND $timeFilter GROUP BY time($interval), "metric"',
+            "query": 'SELECT percentile(value, 95) FROM ' + MEASUREMENT + ' WHERE "context" =~ /' + context + '/ AND "memory" = \'$memory\' AND "device" = \'$device\' AND "branch" = \'$branch\' AND "metric" =~ /$metric/ AND "test" = \'' + TEST + '\' AND $timeFilter GROUP BY time($interval), "metric"',
             "rawQuery": true
           }
         ],

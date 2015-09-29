@@ -76,7 +76,7 @@ var handler = function(callback) {
               "alias": "mtbf hours",
               "groupByTags": [],
               "measurement": MEASUREMENT,
-              "query": 'SELECT sum(value) / sum(failures) FROM mtbf WHERE "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "node" =~ /$node/ AND $timeFilter GROUP BY time($interval)',
+              "query": 'SELECT sum(value) / sum(failures) FROM mtbf WHERE "memory" = \'$memory\' AND "device" = \'$device\' AND "branch" = \'$branch\' AND "node" =~ /$node/ AND $timeFilter GROUP BY time($interval)',
               "rawQuery": true
             }
           ],

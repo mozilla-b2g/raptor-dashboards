@@ -1,9 +1,9 @@
 define(function() {
 
   return function(test) {
-    var gaiaQuery = 'SELECT title, text FROM annotation WHERE "title" =~ /Gaia/ AND "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "test" =~ /' + test + '/ AND $timeFilter';
-    var geckoQuery = 'SELECT title, text FROM annotation WHERE "title" =~ /Gecko/ AND "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "test" =~ /' + test + '/ AND $timeFilter';
-    var buildIdQuery = 'SELECT title, text FROM annotation WHERE "title" =~ /BuildId/ AND "memory" =~ /$memory/ AND "device" =~ /$device/ AND "branch" =~ /$branch/ AND "test" =~ /' + test + '/ AND $timeFilter';
+    var gaiaQuery = 'SELECT title, text FROM annotation WHERE "title" = \'Gaia\' AND "memory" = \'$memory\' AND "device" = \'$device\' AND "branch" = \'$branch\' AND "test" = \'' + test + '\' AND $timeFilter';
+    var geckoQuery = 'SELECT title, text FROM annotation WHERE "title" = \'Gecko\' AND "memory" = \'$memory\' AND "device" = \'$device\' AND "branch" = \'$branch\' AND "test" = \'' + test + '\' AND $timeFilter';
+    var buildIdQuery = 'SELECT title, text FROM annotation WHERE "title" = \'BuildId\' AND "memory" = \'$memory\' AND "device" = \'$device\' AND "branch" = \'$branch\' AND "test" = \'' + test + '\' AND $timeFilter';
 
     var annotations = {};
 
