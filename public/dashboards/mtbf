@@ -21,7 +21,7 @@ var handler = function(callback) {
     dashboard.title = dashboard.originalTitle = "Mean Time Between Failure";
     dashboard.templating.list = [$memory(MEASUREMENT), $device(MEASUREMENT), $branch(MEASUREMENT), $node(MEASUREMENT)];
     dashboard.annotations.list = [annotations.buildId, annotations.gaia, annotations.gecko];
-    dashboard.nav[0].time.from = 'now-3d';
+    dashboard.time.from = 'now-3d';
     dashboard.rows.push({
       "collapse": false,
       "editable": true,
