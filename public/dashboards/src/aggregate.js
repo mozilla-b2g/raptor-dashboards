@@ -20,12 +20,12 @@ define(function() {
         bound95,
         {
           "text": "Mean",
-          "value": "MEAN(value) as value",
+          "value": "MEAN(value)",
           "selected": false
         },
         {
-          "text": "Values",
-          "value": "value",
+          "text": "StdDev",
+          "value": "STDDEV(value)",
           "selected": false
         }
       ],

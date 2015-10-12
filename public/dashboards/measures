@@ -45,7 +45,7 @@ var handler = function(callback) {
     var annotations = $annotations(TEST);
 
     dashboard.title = dashboard.originalTitle = 'Measurements: ' + tests[TEST];
-    dashboard.templating.list = [$metric(MEASUREMENT, TEST), $memory(MEASUREMENT), $device(MEASUREMENT), $branch(MEASUREMENT)];
+    dashboard.templating.list = [$metric(MEASUREMENT, TEST), $aggregate(MEASUREMENT), $memory(MEASUREMENT), $device(MEASUREMENT), $branch(MEASUREMENT)];
     dashboard.annotations.list = [annotations.gaia, annotations.gecko];
     dashboard.rows = [{
       "title": "Apps",
@@ -110,7 +110,7 @@ var handler = function(callback) {
               "metric"
             ],
             "measurement": MEASUREMENT,
-            "query": 'SELECT MEAN(value) + (1.96 * STDDEV(value) / 5.477) FROM ' + MEASUREMENT + ' WHERE "context" =~ /' + context + '/ AND "memory" = \'$memory\' AND "device" = \'$device\' AND "branch" = \'$branch\' AND "metric" =~ /$metric/ AND "test" = \'' + TEST + '\' AND $timeFilter GROUP BY time($interval), "metric"',
+            "query": 'SELECT $aggregate FROM ' + MEASUREMENT + ' WHERE "context" =~ /' + context + '/ AND "memory" = \'$memory\' AND "device" = \'$device\' AND "branch" = \'$branch\' AND "metric" =~ /$metric/ AND "test" = \'' + TEST + '\' AND $timeFilter GROUP BY time($interval), "metric"',
             "rawQuery": true
           }
         ],
