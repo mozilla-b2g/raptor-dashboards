@@ -28,7 +28,7 @@ define(function() {
           "selected": false
         }
       ],
-      "query": null,
+      "query": "95% Bound, Mean, Values",
       "refresh": true,
       "refresh_on_load": true,
       "type": "custom"
