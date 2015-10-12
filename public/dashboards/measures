@@ -105,12 +105,7 @@ var handler = function(callback) {
         "targets": [
           {
             "alias": "$tag_metric",
-            "fields": [
-              {
-                "func": "percentile",
-                "name": "value"
-              }
-            ],
+            "fields": [],
             "groupByTags": [
               "metric"
             ],

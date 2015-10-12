@@ -105,17 +105,12 @@ var handler = function(callback) {
         "targets": [
           {
             "alias": "$tag_metric",
-            "fields": [
-              {
-                "func": "mean",
-                "name": "value"
-              }
-            ],
+            "fields": [],
             "groupByTags": [
               "metric"
             ],
             "measurement": MEASUREMENT,
-            "query": 'SELECT mean(value) FROM ' + MEASUREMENT + ' WHERE "context" =~ /' + context + '/ AND "memory" = \'$memory\' AND "device" = \'$device\' AND "branch" = \'$branch\' AND "metric" =~ /$metric/ AND "test" = \'' + TEST + '\' AND $timeFilter GROUP BY time($interval), "metric"',
+            "query": 'SELECT MEAN(value) + (1.96 * STDDEV(value) / 5.477) FROM ' + MEASUREMENT + ' WHERE "context" =~ /' + context + '/ AND "memory" = \'$memory\' AND "device" = \'$device\' AND "branch" = \'$branch\' AND "metric" =~ /$metric/ AND "test" = \'' + TEST + '\' AND $timeFilter GROUP BY time($interval), "metric"',
             "rawQuery": true
           }
         ],
