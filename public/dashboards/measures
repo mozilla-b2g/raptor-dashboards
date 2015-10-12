@@ -6,25 +6,25 @@ var window, document, ARGS, $, jQuery, moment, kbn;
 var handler = function(callback) {
   var apps = {
     'cold-launch': {
-      'calendar.gaiamobile.org': { id: 1, threshold: 1454, goal: 1000 },
-      'camera.gaiamobile.org': { id: 2, threshold: 1492, goal: 1000 },
-      'clock.gaiamobile.org': { id: 3, threshold: 1232, goal: 1000 },
-      'communications.gaiamobile.org@contacts': { id: 4, threshold: 773, goal: 1000 },
-      'communications.gaiamobile.org@dialer': { id: 5, threshold: 851, goal: 1000 },
-      'email.gaiamobile.org': { id: 6, threshold: 2129, goal: 1000 },
-      'fm.gaiamobile.org': { id: 7, threshold: 604, goal: 1000 },
+      'calendar.gaiamobile.org': { id: 1, threshold: 1573.205, goal: 1000 },
+      'camera.gaiamobile.org': { id: 2, threshold: 1469.274, goal: 1000 },
+      'clock.gaiamobile.org': { id: 3, threshold: 1355.227, goal: 1000 },
+      'communications.gaiamobile.org@contacts': { id: 4, threshold: 719.146, goal: 1000 },
+      'communications.gaiamobile.org@dialer': { id: 5, threshold: 876.149, goal: 1000 },
+      'email.gaiamobile.org': { id: 6, threshold: 519.596, goal: 1000 },
+      'fm.gaiamobile.org': { id: 7, threshold: 705.155, goal: 1000 },
       'ftu.gaiamobile.org': { id: 14, threshold: null, goal: 1000 },
-      'gallery.gaiamobile.org': { id: 8, threshold: 1113, goal: 1000 },
-      'sms.gaiamobile.org': { id: 9, threshold: 1340, goal: 1000 },
-      'music.gaiamobile.org': { id: 10, threshold: 1066, goal: 1000 },
-      'settings.gaiamobile.org': { id: 11, threshold: 2474, goal: 1000 },
-      'video.gaiamobile.org': { id: 12, threshold: 1115, goal: 1000 },
+      'gallery.gaiamobile.org': { id: 8, threshold: 1133.354, goal: 1000 },
+      'sms.gaiamobile.org': { id: 9, threshold: 1341.116, goal: 1000 },
+      'music.gaiamobile.org': { id: 10, threshold: 1079.826, goal: 1000 },
+      'settings.gaiamobile.org': { id: 11, threshold: 2520.732, goal: 1000 },
+      'video.gaiamobile.org': { id: 12, threshold: 1127.615, goal: 1000 },
       'test-startup-limit.gaiamobile.org': { id: 13, threshold: null, goal: 1000 }
     },
     'reboot': {
-      'verticalhome.gaiamobile.org': { id: 14, threshold: null, goal: null },
-      'system.gaiamobile.org': { id: 15, threshold: null, goal: null },
-      'b2g': { id: 16, threshold: null, goal: null }
+      'verticalhome.gaiamobile.org': { id: 15, threshold: null, goal: null },
+      'system.gaiamobile.org': { id: 16, threshold: null, goal: null },
+      'b2g': { id: 17, threshold: null, goal: null }
     }
   };
   var tests = {

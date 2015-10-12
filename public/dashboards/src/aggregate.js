@@ -3,7 +3,7 @@ define(function() {
   return function(measurement) {
     var bound95 = {
       "text": "95% Bound",
-      "value": "MEAN(value) + (1.96 * STDDEV(value) / 5.477) as value",
+      "value": "MEAN(value) + (1.96 * STDDEV(value) / 5.477)",
       "selected": true
     };
 
@@ -29,9 +29,8 @@ define(function() {
           "selected": false
         }
       ],
-      "query": "95% Bound, Mean, Values",
-      "refresh": true,
-      "refresh_on_load": true,
+      "refresh": false,
+      "refresh_on_load": false,
       "type": "custom"
     };
   };
