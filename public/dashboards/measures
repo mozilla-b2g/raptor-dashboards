@@ -31,7 +31,7 @@ var handler = function(callback) {
     'cold-launch': 'Cold Launch',
     'reboot': 'Reboot'
   };
-  var templates = ['memory', 'device', 'branch', 'metric'];
+  var templates = ['memory', 'device', 'branch', 'metric', 'aggregate'];
   var requires = ['base', 'annotations']
     .concat(templates)
     .map(function(r) {
@@ -40,12 +40,12 @@ var handler = function(callback) {
   var MEASUREMENT = 'measure';
   var TEST = ARGS['var-test'] || 'cold-launch';
 
-  require(requires, function($dashboard, $annotations, $memory, $device, $branch, $metric) {
+  require(requires, function($dashboard, $annotations, $memory, $device, $branch, $metric, $aggregate) {
     var dashboard = $dashboard();
     var annotations = $annotations(TEST);
 
     dashboard.title = dashboard.originalTitle = 'Measurements: ' + tests[TEST];
-    dashboard.templating.list = [$metric(MEASUREMENT, TEST), $memory(MEASUREMENT), $device(MEASUREMENT), $branch(MEASUREMENT)];
+    dashboard.templating.list = [$metric(MEASUREMENT, TEST), $aggregate(MEASUREMENT), $memory(MEASUREMENT), $device(MEASUREMENT), $branch(MEASUREMENT)];
     dashboard.annotations.list = [annotations.gaia, annotations.gecko];
     dashboard.rows = [{
       "title": "Apps",
@@ -115,7 +115,7 @@ var handler = function(callback) {
               "metric"
             ],
             "measurement": MEASUREMENT,
-            "query": 'SELECT percentile(value, 95) FROM ' + MEASUREMENT + ' WHERE "context" =~ /' + context + '/ AND "memory" = \'$memory\' AND "device" = \'$device\' AND "branch" = \'$branch\' AND "metric" =~ /$metric/ AND "test" = \'' + TEST + '\' AND $timeFilter GROUP BY time($interval), "metric"',
+            "query": 'SELECT $aggregate FROM ' + MEASUREMENT + ' WHERE "context" =~ /' + context + '/ AND "memory" = \'$memory\' AND "device" = \'$device\' AND "branch" = \'$branch\' AND "metric" =~ /$metric/ AND "test" = \'' + TEST + '\' AND $timeFilter GROUP BY time($interval), "metric"',
             "rawQuery": true
           }
         ],
