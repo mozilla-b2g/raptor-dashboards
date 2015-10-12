@@ -29,7 +29,7 @@ define(function() {
           "selected": false
         }
       ],
-      "query": "MEAN(value) + (1.96 * STDDEV(value) / 5.477) as value",
+      "query": "95% Bound, Mean, Values",
       "refresh": true,
       "refresh_on_load": true,
       "type": "custom"
