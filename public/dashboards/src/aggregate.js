@@ -1,10 +1,15 @@
 define(function() {
 
   return function(measurement) {
+    var bound95 = {
+      "text": "95% Bound",
+      "value": "MEAN(value) + (1.96 * STDDEV(value) / 5.477) as value",
+      "selected": true
+    };
 
     return {
       "allFormat": "glob",
-      "current": {},
+      "current": bound95,
       "datasource": null,
       "includeAll": false,
       "label": "Aggregate",
@@ -12,11 +17,7 @@ define(function() {
       "multiFormat": "regex values",
       "name": "aggregate",
       "options": [
-        {
-          "text": "95% Bound",
-          "value": "MEAN(value) + (1.96 * STDDEV(value) / 5.477) as value",
-          "selected": true
-        },
+        bound95,
         {
           "text": "Mean",
           "value": "MEAN(value) as value",
@@ -28,7 +29,7 @@ define(function() {
           "selected": false
         }
       ],
-      "query": "95% Bound, Mean, Values",
+      "query": "",
       "refresh": true,
       "refresh_on_load": true,
       "type": "custom"
