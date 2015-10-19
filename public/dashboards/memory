@@ -23,6 +23,7 @@ var handler = function(callback) {
     },
     'reboot': {
       'verticalhome.gaiamobile.org': { id: 15, threshold: null, goal: null },
+      'homescreen.gaiamobile.org': { id: 18, threshold: null, goal: null },
       'system.gaiamobile.org': { id: 16, threshold: null, goal: null },
       'b2g': { id: 17, threshold: null, goal: null }
     }
@@ -127,7 +128,8 @@ var handler = function(callback) {
         "y_formats": [
           "bytes",
           "none"
-        ]
+        ],
+        "decimals": 3
       };
     });
 
