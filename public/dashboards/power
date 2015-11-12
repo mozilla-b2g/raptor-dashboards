@@ -109,7 +109,9 @@ var handler = function(callback) {
         new Panel('wifi_browser_download', 'WiFi: Browser Download', 'browser.gaiamobile.org'),
         new Panel('wifi_browser_node', 'WiFi: Browser Node', 'browser.gaiamobile.org'),
         new Panel('post_idle_wifi', 'Post Idle: Wifi', 'verticalhome.gaiamobile.org'),
-        new Panel('post_idle_maps', 'Post Idle: Maps', 'browser.gaiamobile.org')
+        new Panel('post_idle_maps', 'Post Idle: Maps', 'browser.gaiamobile.org'),
+        new Panel('post_idle_camera_preview', 'Post Idle: Camera Preview', 'camera.gaiamobile.org'),
+        new Panel('post_idle_bluetooth', 'Post Idle: Bluetooth', 'settings.gaiamobile.org')
       ]
     });
 
