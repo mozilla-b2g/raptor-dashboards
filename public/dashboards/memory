@@ -19,7 +19,10 @@ var handler = function(callback) {
       'music.gaiamobile.org': { id: 10, threshold: 11.212, goal: null },
       'settings.gaiamobile.org': { id: 11, threshold: 14.578, goal: null },
       'video.gaiamobile.org': { id: 12, threshold: 10.587, goal: null },
-      'test-startup-limit.gaiamobile.org': { id: 13 ,threshold: null, goal: null }
+      'test-startup-limit.gaiamobile.org': { id: 13 ,threshold: null, goal: null },
+      'fxos-performance.github.io@service-worker-baseline': { id: 19, threshold: null, goal: null },
+      'fxos-performance.github.io@service-worker-empty': { id: 20, threshold: null, goal: null },
+      'fxos-performance.github.io@service-worker-simple-fetch': { id: 21, threshold: null, goal: null }
     },
     'reboot': {
       'verticalhome.gaiamobile.org': { id: 15, threshold: null, goal: null },
