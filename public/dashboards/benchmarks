@@ -22,7 +22,7 @@ var handler = function(callback) {
     dashboard.rows.push({
       "collapse": false,
       "editable": true,
-      "height": "500",
+      "height": "800",
       "panels": [
         {
           "aliasColors": {},
@@ -71,7 +71,7 @@ var handler = function(callback) {
           "steppedLine": true,
           "targets": [
             {
-              "alias": "wat",
+              "alias": "$tag_name",
               "groupByTags": [],
               "measurement": "benchmarks",
               "query": 'SELECT value FROM benchmarks WHERE "device" = \'$device\' AND "bench-name" = \'$benchmarkSet\' AND $timeFilter GROUP BY "name"',
