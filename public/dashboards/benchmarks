@@ -89,7 +89,7 @@ var handler = function(callback) {
           "x-axis": true,
           "y-axis": true,
           "y_formats": [
-            "none",
+            "ms",
             "none"
           ]
         }
